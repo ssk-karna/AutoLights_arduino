@@ -8,10 +8,10 @@
 #include <ESP8266WiFi.h>                                                // esp8266 library
 #include <FirebaseArduino.h>                                             // firebase library
 
-#define FIREBASE_HOST "autolights-9925b.firebaseio.com"                         // the project name address from firebase id
-#define FIREBASE_AUTH "LURofrW2GZsRY9q6iA79QwWo0WhBCkq63Vw2DnED"                    // the secret key generated from firebase
-#define WIFI_SSID "NetMi"                                          // input your home or public wifi name 
-#define WIFI_PASSWORD "iamthegame"                                    //password of wifi ssid
+#define FIREBASE_HOST "<project-id>.firebaseio.com"                         // the project name address from firebase id
+#define FIREBASE_AUTH "secret key generated from firebase"                    // the secret key generated from firebase
+#define WIFI_SSID "WIFI_SSID"                                          // input your home or public wifi name 
+#define WIFI_PASSWORD "WIFI_PASSWORD"                                    //password of wifi ssid
 
 String productCode = "FXC007";
 String productKey = "8297";
