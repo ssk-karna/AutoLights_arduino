@@ -8,12 +8,13 @@
 #include <ESP8266WiFi.h>                                                // esp8266 library
 #include <FirebaseArduino.h>                                             // firebase library
 
-#define FIREBASE_HOST "the project name address from firebase id"                         // the project name address from firebase id
-#define FIREBASE_AUTH "the secret key generated from firebase"                    // the secret key generated from firebase
-#define WIFI_SSID " "                                          // input your home or public wifi name 
-#define WIFI_PASSWORD " "                                    //password of wifi ssid
+#define FIREBASE_HOST "autolights-9925b.firebaseio.com"                         // the project name address from firebase id
+#define FIREBASE_AUTH "LURofrW2GZsRY9q6iA79QwWo0WhBCkq63Vw2DnED"                    // the secret key generated from firebase
+#define WIFI_SSID "NetMi"                                          // input your home or public wifi name 
+#define WIFI_PASSWORD "iamthegame"                                    //password of wifi ssid
 
 String productCode = "FXC007";
+String productKey = "8297";
 
 String fireStatus = "";                                                     // led status received from firebase
 int led = D3;                                                                // for external led
@@ -35,11 +36,15 @@ void setup() {
   Serial.print("IP Address is : ");
   Serial.println(WiFi.localIP());                                                      //print local IP address
   Firebase.begin(FIREBASE_HOST, FIREBASE_AUTH);                                       // connect to firebase
-  Firebase.setString("/"+productCode+"/LED_STATUS", "OFF");                                          //send initial string of led status
+  Firebase.setString("/devices/"+productCode+"/LED_STATUS", "OFF");                  //send initial string of led status
+  Firebase.setString("/devices/"+productCode+"/users", "null");
+  Firebase.setString("/devices/"+productCode+"/productKey", productKey);
+  Firebase.setString("/devices/"+productCode+"/productID", productCode);
+  Firebase.setString("/devices/"+productCode+"/lastControlledBy", "null");
 }
 
 void loop() {
-  fireStatus = Firebase.getString("LED_STATUS");                                      // get ld status input from firebase
+  fireStatus = Firebase.getString("Products/"+productCode+"/LED_STATUS");                                      // get ld status input from firebase
   if (fireStatus == "ON") {                                                          // compare the input of led status received from firebase
     Serial.println("Led Turned ON");                         
     digitalWrite(LED_BUILTIN, LOW);                                                  // make bultin led ON
